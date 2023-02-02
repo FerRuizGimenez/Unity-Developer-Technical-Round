@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SlotNumbers : MonoBehaviour
 {
@@ -11,12 +12,15 @@ public class SlotNumbers : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI slotNumber;
     [SerializeField] TextMeshProUGUI timeText;
+    [SerializeField] Button startAgaingBtn;
 
     float _time;
 
+    Manager manager;
+
     private void Awake() 
-    {
-        randomNumberSelected = slotNumber.text;    
+    {  
+        manager = FindObjectOfType<Manager>();
     }
     private void Update() 
     {
@@ -25,14 +29,15 @@ public class SlotNumbers : MonoBehaviour
 
         slotNumber.text = randomNumbers[Random.Range(0, randomNumbers.Length)].ToString();   
 
-        if(_time == 5)
+        if(_time >= 59)
         {
-            StopNumber();
             randomNumberSelected = slotNumber.text;
+            Debug.Log("num generado " + randomNumberSelected);
+            StopNumber();
+            manager.Selection();
+            startAgaingBtn.interactable = true;
         } 
 
-        //Debug.Log(randomNumberSelected);
-        //Debug.Log(_time);
     }
 
     void StopNumber()

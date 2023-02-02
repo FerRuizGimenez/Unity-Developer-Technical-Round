@@ -3,17 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class NumberSelected : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI selectedNumer;
+    [SerializeField] List<Button> _buttons = new List<Button>();
 
     public string clickedBtnName;
 
     public void SelectNumber()
     {
         clickedBtnName = EventSystem.current.currentSelectedGameObject.name;
-        Debug.Log(clickedBtnName);
+        Debug.Log("Boton click " + clickedBtnName);
+
+        foreach (Button buttons in _buttons)
+        {
+            buttons.interactable = false;       
+        }
     }
 
     private void Update() 

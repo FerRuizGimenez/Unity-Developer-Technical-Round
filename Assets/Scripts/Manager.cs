@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Manager : MonoBehaviour
 {
     SlotNumbers slotNumber;
     NumberSelected numberSelected;
+
+    [SerializeField] GameObject winText;
+    [SerializeField] GameObject loseText;
 
     private void Awake() 
     {
@@ -13,16 +17,16 @@ public class Manager : MonoBehaviour
         numberSelected = FindObjectOfType<NumberSelected>();    
     }
 
-    private void Update() 
+    public void Selection() 
     {
         if(slotNumber.randomNumberSelected == numberSelected.clickedBtnName)
         {
             Debug.Log("You Win");
-
+            winText.SetActive(true);
         }   
         else
         {
-            //Debug.Log("LOSE");
+            loseText.SetActive(true);
         } 
     }
 }
